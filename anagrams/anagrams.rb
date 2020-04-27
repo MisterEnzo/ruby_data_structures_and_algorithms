@@ -1,11 +1,13 @@
-require 'byebug'
-
 # Create a method called anagram that takes two strings
 # and returns true if they are anagrams of each, and false otherwise
+# The method should ignore non alphanumeric characters (ex. []()*&^%) and spaces
+# It should also not be case-sensitive
 # Example:
 # anagrams("haha", "ahah") ---> true
-# anagrams("blaBla", "lablab") ---> false (it is case sensitive)
-# anagrams("tashi", "ashit") ---> true
+# anagrams("blaBla", "lablab") ---> false 
+# anagrams("So a man took a shit", "Satoshi Nakamoto") ---> true
+
+require 'byebug'
 
 
 
@@ -20,30 +22,29 @@ require 'byebug'
 
 
 
-# solution
+
+
+# Solution:
 
 # def char_map(str)
-#   map = {}
-#   chars = str.split('')
+#   chars = str.downcase.gsub(/[\W]*/, "").split("")
+#   char_map = {}
 #   for c in chars
-#     if map[c]
-#       map[c] += 1
+#     if char_map[c]
+#       char_map[c] += 1
 #     else
-#       map[c] =1
+#       char_map[c] = 1
 #     end
 #   end
-#   map
+#   char_map
 # end
 
 # def anagrams(str1, str2)
-#   anagram = true
-#   map1 = char_map(str1)
-#   map2 = char_map(str2)
-#   map1.each do |k, v|
-#     if !map2[k] || map2[k] != v
-#       anagram = false
-#     end
+#   char_map_1 = char_map(str1)
+#   char_map_2 = char_map(str2)
+#   return false if char_map_1.size != char_map_2.size
+#   char_map_1.each do |k, v|
+#     return false if char_map_2[k] != v
 #   end
-#   anagram
-
+#   true
 # end
